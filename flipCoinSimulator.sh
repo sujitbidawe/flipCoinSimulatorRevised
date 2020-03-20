@@ -117,18 +117,39 @@ TTTPercent=`echo "scale=2; (${tripletDict[TTTCount]}*100)/$repeatitions" | bc`
 
 
 singlet
+#loop to display singlet dictionary 
+echo "~~~~~displaying singlet~~~~~"
+
+for key in "${!singletDict[@]}"
+do
+		echo "$key": "${singletDict[$key]}"
+done
+
 echo "percentage of singlet heads: $HPercent%"
 echo "percentage of singlet tails: $TPercent%"
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+
 doublet
+#loop to display doublet dictionary
+echo "~~~~~displaying doublet~~~~~"
+
+for key in "${!doubletDict[@]}"
+do
+		echo "$key": "${doubletDict[$key]}"
+done
 
 echo "percentage of doublet HH: $HHPercent%"
 echo "percentage of doublet HT: $HTPercent%"
 echo "percentage of doublet TH: $THPercent%"
 echo "percentage of doublet TT: $TTPercent%"
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 
 triplet
+#loop to display triplet dictionary
+echo "~~~~~displaying triplet~~~~~"
+for key in "${!tripletDict[@]}"
+do
+		echo "$key": "${tripletDict[$key]}"
+done
+
 echo "percentage of triplet HHH: $HHHPercent%"
 echo "percentage of triplet HHT: $HHTPercent%"
 echo "percentage of triplet HTH: $HTHPercent%"
