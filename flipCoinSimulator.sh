@@ -4,9 +4,9 @@ declare -A singletDict
 declare -A doubletDict
 declare -A tripletDict
 
-singletDict=( ["HCount"]=0 ["TCount"]=0 )
-doubletDict=( ["HHCount"]=0 ["HTCount"]=0 ["THCount"]=0 ["TTCount"]=0 )
-tripletDict=( ["HHHCount"]=0 ["HHTCount"]=0 ["HTHCount"]=0 ["THHCount"]=0 ["HTTCount"]=0 ["THTCount"]=0 ["TTHCount"]=0 ["TTTCount"]=0 )
+singletDict=( ["H"]=0 ["T"]=0 )
+doubletDict=( ["HH"]=0 ["HT"]=0 ["TH"]=0 ["TT"]=0 )
+tripletDict=( ["HHH"]=0 ["HHT"]=0 ["HTH"]=0 ["THH"]=0 ["HTT"]=0 ["THT"]=0 ["TTH"]=0 ["TTT"]=0 )
 
 read -p "how many times do you want to flip the coin: " repeatitions
 
@@ -24,55 +24,55 @@ echo $flipOut
 
 # function for singlet coin flip
 function singlet(){
-for (( flipCount=1; flipCount<=repeatitions; flipCount++ ))
+for (( flip=1; flip<=repeatitions; flip++ ))
 do
 		flipOut="$( coinFlip $flipOut )"
 		if [[ "$flipOut" == "H" ]]
 		then
-				singletDict[HCount]=$(( ${singletDict[HCount]}+1 ))
+				singletDict[H]=$(( ${singletDict[H]}+1 ))
 		else
-            singletDict[TCount]=$(( ${singletDict[TCount]}+1 ))
+            singletDict[T]=$(( ${singletDict[T]}+1 ))
 		fi
 done
 
-HPercent=`echo "scale=2; (${singletDict[HCount]}*100)/$repeatitions" | bc`
-TPercent=`echo "scale=2; (${singletDict[TCount]}*100)/$repeatitions" | bc`
+HPercent=`echo "scale=2; (${singletDict[H]}*100)/$repeatitions" | bc`
+TPercent=`echo "scale=2; (${singletDict[T]}*100)/$repeatitions" | bc`
 
 }
 
 # function for doublet coin flip
 function doublet(){
 
-for (( flipCount=1; flipCount<=repeatitions; flipCount++ ))
+for (( flip=1; flip<=repeatitions; flip++ ))
 do
 		flipOne="$( coinFlip $flipOut )"
 		flipTwo="$( coinFlip $flipOut )"
 
 		if [[ "$flipOne" == "H" && "$flipTwo" == "H" ]]
 		then
-				doubletDict[HHCount]=$(( ${doubletDict[HHCount]}+1 ))
+				doubletDict[HH]=$(( ${doubletDict[HH]}+1 ))
 		elif [[ "$flipOne" == "H" && "$flipTwo" == "T" ]]
 		then
-				doubletDict[HTCount]=$(( ${doubletDict[HTCount]}+1 ))
+				doubletDict[HT]=$(( ${doubletDict[HT]}+1 ))
 		elif [[ "$flipOne" == "T" && "$flipTwo" == "H" ]]
 		then
-				doubletDict[THCount]=$(( ${doubletDict[THCount]}+1 ))
+				doubletDict[TH]=$(( ${doubletDict[TH]}+1 ))
 		else
-				doubletDict[TTCount]=$(( ${doubletDict[TTCount]}+1 ))
+				doubletDict[TT]=$(( ${doubletDict[TT]}+1 ))
 		fi
 done
 
-HHPercent=`echo "scale=2; (${doubletDict[HHCount]}*100)/$repeatitions" | bc`
-HTPercent=`echo "scale=2; (${doubletDict[HTCount]}*100)/$repeatitions" | bc`
-THPercent=`echo "scale=2; (${doubletDict[THCount]}*100)/$repeatitions" | bc`
-TTPercent=`echo "scale=2; (${doubletDict[TTCount]}*100)/$repeatitions" | bc`
+HHPercent=`echo "scale=2; (${doubletDict[HH]}*100)/$repeatitions" | bc`
+HTPercent=`echo "scale=2; (${doubletDict[HT]}*100)/$repeatitions" | bc`
+THPercent=`echo "scale=2; (${doubletDict[TH]}*100)/$repeatitions" | bc`
+TTPercent=`echo "scale=2; (${doubletDict[TT]}*100)/$repeatitions" | bc`
 
 }
 
 # function for doublet coin flip
 function triplet(){
 
-for (( flipCount=1; flipCount<=repeatitions; flipCount++ ))
+for (( flip=1; flip<=repeatitions; flip++ ))
 do
 		flipOne="$( coinFlip $flipOut )"
 		flipTwo="$( coinFlip $flipOut )"
@@ -80,38 +80,38 @@ do
 
 		if [[ "$flipOne" == "H" && "$flipTwo" == "H" && "$flipThree" == "H" ]]
 		then
-				tripletDict[HHHCount]=$(( ${tripletDict[HHHCount]}+1 ))
+				tripletDict[HHH]=$(( ${tripletDict[HHH]}+1 ))
 		elif [[ "$flipOne" == "H" && "$flipTwo" == "H" && "$flipThree" == "T" ]]
 		then
-				tripletDict[HHTCount]=$(( ${tripletDict[HHTCount]}+1 ))
+				tripletDict[HHT]=$(( ${tripletDict[HHT]}+1 ))
 		elif [[ "$flipOne" == "H" && "$flipTwo" == "T" && "$flipThree" == "H" ]]
 		then
- 				tripletDict[HTHCount]=$(( ${tripletDict[HTHCount]}+1 ))
+ 				tripletDict[HTH]=$(( ${tripletDict[HTH]}+1 ))
 		elif [[ "$flipOne" == "T" && "$flipTwo" == "H" && "$flipThree" == "H" ]]
 		then
-				tripletDict[THHCount]=$(( ${tripletDict[THHCount]}+1 ))
+				tripletDict[THH]=$(( ${tripletDict[THH]}+1 ))
 		elif [[ "$flipOne" == "H" && "$flipTwo" == "T" && "$flipThree" == "T" ]]
 		then
-				tripletDict[HTTCount]=$(( ${tripletDict[HTTCount]}+1 ))
+				tripletDict[HTT]=$(( ${tripletDict[HTT]}+1 ))
 		elif [[ "$flipOne" == "T" && "$flipTwo" == "H" && "$flipThree" == "T" ]]
 		then
-				tripletDict[THTCount]=$(( ${tripletDict[THTCount]}+1 ))
+				tripletDict[THT]=$(( ${tripletDict[THT]}+1 ))
 		elif [[ "$flipOne" == "T" && "$flipTwo" == "T" && "$flipThree" == "H" ]]
 		then
-				tripletDict[TTHCount]=$(( ${tripletDict[TTHCount]}+1 ))
+				tripletDict[TTH]=$(( ${tripletDict[TTH]}+1 ))
 		else
-				tripletDict[TTTCount]=$(( ${tripletDict[TTTCount]}+1 ))
+				tripletDict[TTT]=$(( ${tripletDict[TTT]}+1 ))
 		fi
 done
 
-HHHPercent=`echo "scale=2; (${tripletDict[HHHCount]}*100)/$repeatitions" | bc`
-HHTPercent=`echo "scale=2; (${tripletDict[HHTCount]}*100)/$repeatitions" | bc`
-HTHPercent=`echo "scale=2; (${tripletDict[HTHCount]}*100)/$repeatitions" | bc`
-THHPercent=`echo "scale=2; (${tripletDict[THHCount]}*100)/$repeatitions" | bc`
-HTTPercent=`echo "scale=2; (${tripletDict[HTTCount]}*100)/$repeatitions" | bc`
-THTPercent=`echo "scale=2; (${tripletDict[THTCount]}*100)/$repeatitions" | bc`
-TTHPercent=`echo "scale=2; (${tripletDict[TTHCount]}*100)/$repeatitions" | bc`
-TTTPercent=`echo "scale=2; (${tripletDict[TTTCount]}*100)/$repeatitions" | bc`
+HHHPercent=`echo "scale=2; (${tripletDict[HHH]}*100)/$repeatitions" | bc`
+HHTPercent=`echo "scale=2; (${tripletDict[HHT]}*100)/$repeatitions" | bc`
+HTHPercent=`echo "scale=2; (${tripletDict[HTH]}*100)/$repeatitions" | bc`
+THHPercent=`echo "scale=2; (${tripletDict[THH]}*100)/$repeatitions" | bc`
+HTTPercent=`echo "scale=2; (${tripletDict[HTT]}*100)/$repeatitions" | bc`
+THTPercent=`echo "scale=2; (${tripletDict[THT]}*100)/$repeatitions" | bc`
+TTHPercent=`echo "scale=2; (${tripletDict[TTH]}*100)/$repeatitions" | bc`
+TTTPercent=`echo "scale=2; (${tripletDict[TTT]}*100)/$repeatitions" | bc`
 				
 }
 
@@ -128,6 +128,13 @@ done
 echo "percentage of singlet heads: $HPercent%"
 echo "percentage of singlet tails: $TPercent%"
 
+#winning combinations
+echo -n "The winning combination is: "
+for i in ${!singletDict[@]}
+	do
+		echo "$i: ${singletDict[$i]}"
+	done | sort -k2 -rn | head -1
+
 doublet
 #loop to display doublet dictionary
 echo "~~~~~displaying doublet~~~~~"
@@ -141,6 +148,13 @@ echo "percentage of doublet HH: $HHPercent%"
 echo "percentage of doublet HT: $HTPercent%"
 echo "percentage of doublet TH: $THPercent%"
 echo "percentage of doublet TT: $TTPercent%"
+
+#winning combinations
+echo -n "The winning combination is: "
+for i in ${!doubletDict[@]}
+	do
+		echo "$i: ${doubletDict[$i]}"
+	done | sort -k2 -rn | head -1
 
 triplet
 #loop to display triplet dictionary
@@ -158,3 +172,10 @@ echo "percentage of triplet HTT: $HTTPercent%"
 echo "percentage of triplet THT: $THTPercent%"
 echo "percentage of triplet TTH: $TTHPercent%"
 echo "percentage of triplet TTT: $TTTPercent%"
+
+#winning combinations
+echo -n "The winning combination is: "
+for i in ${!tripletDict[@]}
+	do
+		echo "$i: ${tripletDict[$i]}"
+	done | sort -k2 -rn | head -1
